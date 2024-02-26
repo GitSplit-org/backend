@@ -1,7 +1,6 @@
-package models
+package projects
 
-type Project struct {
-	Id          string `json:"id" gorm:"primaryKey"`
+type AddProjectRequest struct {
 	Name        string `json:"name"`
 	Url         string `json:"url"`
 	Description string `json:"description"`

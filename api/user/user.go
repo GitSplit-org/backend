@@ -98,7 +98,7 @@ func AssignWalletToUsername(c *gin.Context) {
 			"error": "bad request",
 		})
 	}
-	tx, err := instance.AssignAddressToUsername(auth, request.username, common.HexToAddress(request.walletAddress))
+	tx, err := instance.AssignAddressToUsername(auth, request.Username, common.HexToAddress(request.WalletAddress))
 	if err != nil {
 		logrus.Errorf("cannot assert type: publicKey is not of type *ecdsa.PublicKey")
 		c.JSON(http.StatusInternalServerError, gin.H{

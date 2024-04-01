@@ -24,8 +24,9 @@ func ApplyRoutes(r *gin.RouterGroup) {
 
 func AddProject(c *gin.Context) {
 	var req AddProjectRequest
-	if err := c.BindJSON(&req); err != nil {
+	if err := c.ShouldBind(&req); err != nil {
 		fmt.Println("error", err)
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 	db := dbconfig.GetDb()
@@ -39,9 +40,11 @@ func AddProject(c *gin.Context) {
 	project.Twitter = req.Twitter
 	project.Linkedin = req.Linkedin
 	project.Owner = req.Owner
+	project.Image = req.Image
 	err := db.Create(&project).Error
 	if err != nil {
 		fmt.Println("error", err.Error())
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{

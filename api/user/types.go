@@ -1,6 +1,6 @@
 package user
 
 type request struct {
-	username      string `json:"username"`
-	walletAddress string `json:"username"`
+	Username      string `json:"username"`
+	WalletAddress string `json:"walletAddress"`
 }

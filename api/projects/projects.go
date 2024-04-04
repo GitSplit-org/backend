@@ -30,6 +30,9 @@ func AddProject(c *gin.Context) {
 		return
 	}
 	db := dbconfig.GetDb()
+	instance, _ := db.DB()
+	defer instance.Close()
+
 	var project models.Project
 	id := uuid.New()
 	project.Id = id.String()
@@ -55,6 +58,8 @@ func AddProject(c *gin.Context) {
 
 func GetAllProjects(c *gin.Context) {
 	db := dbconfig.GetDb()
+	instance, _ := db.DB()
+	defer instance.Close()
 	var projects []models.Project
 	err := db.Model(&models.Project{}).Find(&projects).Error
 	if err != nil {
@@ -69,6 +74,9 @@ func GetAllProjects(c *gin.Context) {
 
 func getProjectById(c *gin.Context) {
 	db := dbconfig.GetDb()
+	instance, _ := db.DB()
+	defer instance.Close()
+
 	id := c.Query("id")
 
 	var project models.Project

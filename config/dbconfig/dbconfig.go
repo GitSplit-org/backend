@@ -47,7 +47,8 @@ func GetDb() *gorm.DB {
 
 func Init() error {
 	db := GetDb()
-
+	instance, _ := db.DB()
+	defer instance.Close()
 	err := db.AutoMigrate(&models.Project{})
 	if err != nil {
 		log.Fatal(err)
